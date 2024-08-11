@@ -26,14 +26,3 @@ export async function fetchLocations(value) {
     console.log(`Error location`, err);
   }
 }
-
-// export async function fetchLocations(value) {
-//   try {
-//     const response = await axios.get(
-//       `${BASE_URL}/search.json?key=${API_KEY}&q=${value}`
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
