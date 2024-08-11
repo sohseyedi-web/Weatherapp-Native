@@ -13,7 +13,7 @@ export default function SearchInputHeader({ show, onChange, toggleShow }) {
           onChangeText={onChange}
           placeholder="Search City..."
           placeholderTextColor={"lightgray"}
-          className={`flex-1 h-9 pb-1 pl-6 text-lg text-white`}
+          className={`flex-1 h-9 pb-1 pl-6 text-lg text-white font-medium`}
         />
       ) : null}
       <TouchableOpacity
