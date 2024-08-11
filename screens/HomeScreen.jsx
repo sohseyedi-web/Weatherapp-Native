@@ -1,8 +1,12 @@
+import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text } from "react-native";
 
-
 export default function HomeScreen() {
+
+  let [fontLoaded] = useFonts({
+    'vazir' : require('../assets/fonts/Vazir.ttf')
+  })
 
   return (
     <View style={styles.container}>
