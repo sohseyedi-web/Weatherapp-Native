@@ -7,7 +7,7 @@ const BASE_URL = "https://api.weatherapi.com/v1";
 export async function fetchWeatherForecast(value, days) {
   return await axios
     .get(
-      `/${BASE_URL}/forecast.json?key=${API_KEY}&q=${value}&days=${days}&aqi=no&alerts=no`
+      `${BASE_URL}/forecast.json?key=${API_KEY}&q=${value}&days=${days}&aqi=no&alerts=no`
     )
     .then((response) => response.data)
     .catch((err) => console.log(`Error fetch`, err));
