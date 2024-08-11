@@ -1,29 +1,38 @@
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
+import LocationBox from "../components/LocationBox";
+import SearchInputHeader from "../components/SearchInputHeader";
+import { fetchLocations } from "../api/https";
 
 export default function HomeScreen() {
-  let [fontLoaded] = useFonts({
-    vazir: require("../assets/fonts/Vazir.ttf"),
-  });
   const [showSearch, setShowSearch] = useState(false);
+  const [locations, setLocations] = useState([]);
+  const [weather, setWeather] = useState({});
 
-  const onChangeHandler = (value) => {
+  const onChangeHandler = async (value) => {
     if (value.length > 0) {
-      console.log(value);
+      const data = await fetchLocations(value);
+      setLocations(data);
     }
   };
 
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      {/* search input city */}
-      <SearchInputHeader
-        show={showSearch}
-        toggleShow={() => setShowSearch(!show)}
-        onChange={onChangeHandler}
-      />
+      <SafeAreaView className="flex flex-1 p-4 relative mt-3">
+        {/* search input city */}
+        <SearchInputHeader
+          show={showSearch}
+          toggleShow={() => setShowSearch(!showSearch)}
+          onChange={onChangeHandler}
+        />
+        {/* location box */}
+        {locations?.length > 0 && showSearch ? (
+          <LocationBox locations={locations} />
+        ) : null}
+      </SafeAreaView>
     </View>
   );
 }
@@ -31,7 +40,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontFamily: "vazir",
     backgroundColor: "rgb(15 23 42)",
   },
 });
