@@ -1,4 +1,3 @@
-import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
@@ -6,6 +5,7 @@ import LocationBox from "../components/LocationBox";
 import SearchInputHeader from "../components/SearchInputHeader";
 import { fetchLocations, fetchWeatherForecast } from "../api/https";
 import ResultWeather from "../components/ResultWeather";
+import NextDaysWeatherBox from "../components/NextDaysWeatherBox";
 
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
@@ -40,7 +40,10 @@ export default function HomeScreen() {
         {locations?.length > 0 && showSearch ? (
           <LocationBox locations={locations} handleLoc={handleSubmitLocation} />
         ) : null}
+        {/* result city weather */}
         <ResultWeather weather={weather} />
+        {/* next days weather data*/}
+        <NextDaysWeatherBox weather={weather} />
       </SafeAreaView>
     </View>
   );
