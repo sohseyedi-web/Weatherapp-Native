@@ -4,12 +4,20 @@ import { useState } from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
 import LocationBox from "../components/LocationBox";
 import SearchInputHeader from "../components/SearchInputHeader";
-import { fetchLocations } from "../api/https";
+import { fetchLocations, fetchWeatherForecast } from "../api/https";
+import ResultWeather from "../components/ResultWeather";
 
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
   const [locations, setLocations] = useState([]);
   const [weather, setWeather] = useState({});
+
+  const handleSubmitLocation = async (loc) => {
+    setShowSearch(false);
+    setLocations("");
+    const data = await fetchWeatherForecast(loc?.name, "7");
+    setWeather(data);
+  };
 
   const onChangeHandler = async (value) => {
     if (value.length > 0) {
@@ -30,8 +38,9 @@ export default function HomeScreen() {
         />
         {/* location box */}
         {locations?.length > 0 && showSearch ? (
-          <LocationBox locations={locations} />
+          <LocationBox locations={locations} handleLoc={handleSubmitLocation} />
         ) : null}
+        <ResultWeather weather={weather} />
       </SafeAreaView>
     </View>
   );
