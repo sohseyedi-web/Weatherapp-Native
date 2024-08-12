@@ -1,6 +1,7 @@
 import { View, Text, FlatList, Image } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { weatherImage } from "./../utils/weatherImage";
+import { toPersianNumbers } from "../utils/toPersianNumber";
 
 export default function NextDaysWeatherBox({ weather }) {
   const getDayName = (dateString) => {
@@ -18,7 +19,7 @@ export default function NextDaysWeatherBox({ weather }) {
       />
       <Text className={`text-white my-1`}>{getDayName(item?.date)}</Text>
       <Text className={`text-white text-xl font-semibold`}>
-        {item?.day?.avgtemp_c}&#176;
+        {toPersianNumbers(item?.day?.avgtemp_c)}&#176;
       </Text>
     </View>
   );
