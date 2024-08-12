@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { View, StyleSheet, SafeAreaView, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 import LocationBox from "../components/LocationBox";
 import SearchInputHeader from "../components/SearchInputHeader";
 import { fetchLocations, fetchWeatherForecast } from "../api/https";
@@ -33,6 +33,16 @@ export default function HomeScreen() {
       const data = await fetchLocations(value);
       setLocations(data);
     }
+  };
+
+  useEffect(() => {
+    fetchMyWeatherData();
+  }, []);
+
+  const fetchMyWeatherData = async () => {
+    const data = await fetchWeatherForecast("tehran", "7");
+    setWeather(data);
+    setLoading(false);
   };
 
   return (
