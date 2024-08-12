@@ -1,7 +1,7 @@
 import { View, FlatList, TouchableOpacity, Text } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 
-export default function LocationBox({ locations }) {
+export default function LocationBox({ locations, handleLoc }) {
   const renderItem = ({ item, index }) => (
     <TouchableOpacity
       onPress={() => handleLoc(item)}
